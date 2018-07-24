@@ -89,21 +89,21 @@ const getData = () =>
             .map(url => fetch(url, {
                     method: 'GET',
                     headers: {
-                        'Content-Type': 'attachment;filename=myfilename.csv'
+                        'Content-Type': 'application/CSV'
                     }
                 })
                 .then(response => response.ok ? response.text() : Promise.reject(response.status))
                 .then(text => parseCSV(text))
             )
     )
-        .then(value => {
-            return processData({
+        .then(value =>
+            processData({
                 attributes: value[0],
                 auto: value[1],
                 colors: value[2],
                 countries: value[3],
                 options: value[4]
-            });
-        })
+            })
+        );
 
 export default getData
